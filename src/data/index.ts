@@ -22,6 +22,7 @@ import { restoreFromLocalStorage } from "./localStorage";
 
 export { loadFromBlob } from "./blob";
 export { saveAsJSON, loadFromJSON } from "./json";
+export { loadFeaturesFromTopoJSON } from "./topojson";
 export { saveToLocalStorage } from "./localStorage";
 
 const BACKEND_GET = "https://json.excalidraw.com/api/v1/";

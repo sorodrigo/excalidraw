@@ -86,7 +86,8 @@
     "createNewRoom": "Crea nuova stanza",
     "toggleFullScreen": "Attiva/Disattiva schermo intero",
     "toggleZenMode": "Attiva/Disattiva modalità zen",
-    "exitZenMode": "Uscire dalla modalità zen"
+    "exitZenMode": "Uscire dalla modalità zen",
+    "loadGeo": "Carica Geometria"
   },
   "alerts": {
     "clearReset": "Questo cancellerà l'intera tela. Sei sicuro?",

@@ -41,10 +41,12 @@
     "react-scripts": "3.4.1",
     "roughjs": "4.3.1",
     "socket.io-client": "2.3.0",
+    "topojson": "3.0.2",
     "typescript": "3.8.3"
   },
   "devDependencies": {
     "@types/lodash.throttle": "4.1.6",
+    "@types/topojson": "3.2.2",
     "asar": "3.0.3",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.11.0",

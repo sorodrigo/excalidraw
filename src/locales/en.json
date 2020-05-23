@@ -86,7 +86,8 @@
     "createNewRoom": "Create new room",
     "toggleFullScreen": "Toggle full screen",
     "toggleZenMode": "Toggle zen mode",
-    "exitZenMode": "Exit zen mode"
+    "exitZenMode": "Exit zen mode",
+    "loadGeo": "Load Geometry"
   },
   "alerts": {
     "clearReset": "This will clear the whole canvas. Are you sure?",

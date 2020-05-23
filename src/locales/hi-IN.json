@@ -86,7 +86,8 @@
     "createNewRoom": "",
     "toggleFullScreen": "",
     "toggleZenMode": "",
-    "exitZenMode": ""
+    "exitZenMode": "",
+    "loadGeo": ""
   },
   "alerts": {
     "clearReset": "",

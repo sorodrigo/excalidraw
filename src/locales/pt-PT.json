@@ -86,7 +86,8 @@
     "createNewRoom": "Criar nova sala",
     "toggleFullScreen": "Alterar tela cheia",
     "toggleZenMode": "Alternar modo zen",
-    "exitZenMode": "Sair do modo zen"
+    "exitZenMode": "Sair do modo zen",
+    "loadGeo": "Load Geometry"
   },
   "alerts": {
     "clearReset": "O canvas inteiro será excluído. Tens a certeza?",

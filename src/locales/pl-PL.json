@@ -86,7 +86,8 @@
     "createNewRoom": "Utwórz nowy pokój",
     "toggleFullScreen": "Włącz/wyłącz tryb pełnoekranowy",
     "toggleZenMode": "",
-    "exitZenMode": ""
+    "exitZenMode": "",
+    "loadGeo": ""
   },
   "alerts": {
     "clearReset": "To spowoduje usunięcie wszystkiego z dokumentu. Czy chcesz kontynuować?",

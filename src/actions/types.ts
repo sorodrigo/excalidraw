@@ -55,7 +55,8 @@ export type ActionName =
   | "changeFontFamily"
   | "changeTextAlign"
   | "toggleFullScreen"
-  | "toggleShortcuts";
+  | "toggleShortcuts"
+  | "loadGeo";
 
 export interface Action {
   name: ActionName;

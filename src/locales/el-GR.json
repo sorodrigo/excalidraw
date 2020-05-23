@@ -86,7 +86,8 @@
     "createNewRoom": "Δημιουργία νέου χώρου",
     "toggleFullScreen": "Εναλλαγή πλήρους οθόνης",
     "toggleZenMode": "Εναλλαγή λειτουργίας Zen",
-    "exitZenMode": "Έξοδος απο την λειτουργία Zen"
+    "exitZenMode": "Έξοδος απο την λειτουργία Zen",
+    "loadGeo": ""
   },
   "alerts": {
     "clearReset": "Αυτό θα σβήσει ολόκληρο τον καμβά. Είσαι σίγουρος;",

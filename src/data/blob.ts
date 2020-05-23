@@ -2,6 +2,27 @@ import { getDefaultAppState } from "../appState";
 import { restore } from "./restore";
 import { t } from "../i18n";
 
+export const parseBlob = async (blob: any): Promise<string> => {
+  if (blob.handle) {
+    (window as any).handle = blob.handle;
+  }
+  let contents;
+  if ("text" in Blob) {
+    contents = await blob.text();
+  } else {
+    contents = await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsText(blob, "utf8");
+      reader.onloadend = () => {
+        if (reader.readyState === FileReader.DONE) {
+          resolve(reader.result as string);
+        }
+      };
+    });
+  }
+  return contents;
+};
+
 export const loadFromBlob = async (blob: any) => {
   const updateAppState = (contents: string) => {
     const defaultAppState = getDefaultAppState();
@@ -20,23 +41,7 @@ export const loadFromBlob = async (blob: any) => {
     return { elements, appState };
   };
 
-  if (blob.handle) {
-    (window as any).handle = blob.handle;
-  }
-  let contents;
-  if ("text" in Blob) {
-    contents = await blob.text();
-  } else {
-    contents = await new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.readAsText(blob, "utf8");
-      reader.onloadend = () => {
-        if (reader.readyState === FileReader.DONE) {
-          resolve(reader.result as string);
-        }
-      };
-    });
-  }
+  const contents = await parseBlob(blob);
 
   const { elements, appState } = updateAppState(contents);
   return restore(elements, appState, { scrollToContent: true });

@@ -129,6 +129,7 @@ const LayerUI = ({
           <Stack.Row gap={1} justifyContent="space-between">
             {actionManager.renderAction("loadScene")}
             {actionManager.renderAction("saveScene")}
+            {actionManager.renderAction("loadGeo")}
             {renderExportDialog()}
             {actionManager.renderAction("clearCanvas")}
             <RoomDialog

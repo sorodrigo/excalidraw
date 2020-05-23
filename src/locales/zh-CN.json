@@ -86,7 +86,8 @@
     "createNewRoom": "新建会议室",
     "toggleFullScreen": "切换全屏显示",
     "toggleZenMode": "",
-    "exitZenMode": ""
+    "exitZenMode": "",
+    "loadGeo": ""
   },
   "alerts": {
     "clearReset": "这将会清除整个 canvas。你确定吗?",
