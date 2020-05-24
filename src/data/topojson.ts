@@ -1,5 +1,4 @@
 import { fileOpen } from "browser-nativefs";
-import { merge } from "topojson";
 import { Topology } from "topojson-specification";
 import { MultiPolygon } from "geojson";
 import { ExcalidrawElement } from "../element/types";
@@ -13,15 +12,18 @@ export const loadFromTopoJSON = async () => {
   });
   const text = await parseBlob(blob);
   const topojson: Topology = JSON.parse(text);
+
+  // topojson-client named exports are not declared in @types/topojson-client
+  // @ts-ignore
+  const [{ merge }, { geoPath, geoEqualEarth }] = await Promise.all([
+    import("topojson-client"),
+    import("d3-geo"),
+  ]);
   const geo: MultiPolygon = merge(
     topojson,
     // @ts-ignore
     topojson.objects[Object.keys(topojson.objects)[0]].geometries,
   );
-  const [{ geoPath }, { geoEqualEarth }] = await Promise.all([
-    import("d3"),
-    import("d3-geo"),
-  ]);
 
   const elements: ExcalidrawElement[] = [];
   const projection = geoEqualEarth().center([20, 0]);
