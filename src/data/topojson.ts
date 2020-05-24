@@ -1,7 +1,7 @@
 import { fileOpen } from "browser-nativefs";
-import { feature } from "topojson";
+import { merge } from "topojson";
 import { Topology } from "topojson-specification";
-import { FeatureCollection } from "geojson";
+import { MultiPolygon } from "geojson";
 import { ExcalidrawElement } from "../element/types";
 import { parseBlob } from "./blob";
 import { restore } from "./restore";
@@ -13,42 +13,40 @@ export const loadFromTopoJSON = async () => {
   });
   const text = await parseBlob(blob);
   const topojson: Topology = JSON.parse(text);
-  const { features } = feature(
+  const geo: MultiPolygon = merge(
     topojson,
     // @ts-ignore
-    topojson.objects[Object.keys(topojson.objects)[0]],
-  ) as FeatureCollection;
+    topojson.objects[Object.keys(topojson.objects)[0]].geometries,
+  );
   const [{ geoPath }, { geoEqualEarth }] = await Promise.all([
     import("d3"),
     import("d3-geo"),
   ]);
 
-  const elements: ExcalidrawElement[] = features.flatMap((feature) => {
-    const projection = geoEqualEarth().center([20, 0]);
-    const makeDirections = geoPath(projection);
-    const path = makeDirections(feature);
-    if (path) {
-      const element = ({
-        id: feature.id,
-        type: "geometry",
-        path,
-        height: window.innerHeight / 4,
-        width: window.innerWidth / 3,
-        x: 0,
-        y: 0,
-        strokeColor: "#000000",
-        backgroundColor: "transparent",
-        fillStyle: "hachure",
-        strokeWidth: 1,
-        strokeStyle: "solid",
-        roughness: 1,
-        opacity: 100,
-        isDeleted: false,
-      } as unknown) as ExcalidrawElement;
-      return element;
-    }
-    return [];
-  });
+  const elements: ExcalidrawElement[] = [];
+  const projection = geoEqualEarth().center([20, 0]);
+  const makeDirections = geoPath(projection);
+  const path = makeDirections(geo);
+  if (path) {
+    const element = ({
+      id: "geo",
+      type: "geometry",
+      path,
+      height: 515,
+      width: 920,
+      x: 300,
+      y: 100,
+      strokeColor: "#000000",
+      backgroundColor: "transparent",
+      fillStyle: "hachure",
+      strokeWidth: 1,
+      strokeStyle: "solid",
+      roughness: 1,
+      opacity: 100,
+      isDeleted: false,
+    } as unknown) as ExcalidrawElement;
+    elements.push(element);
+  }
 
   return restore(elements, null);
 };
