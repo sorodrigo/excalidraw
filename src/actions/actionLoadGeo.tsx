@@ -3,14 +3,18 @@ import { ToolButton } from "../components/ToolButton";
 import { geo } from "../components/icons";
 import { t } from "../i18n";
 import useIsMobile from "../is-mobile";
-import { loadFeaturesFromTopoJSON } from "../data";
+import { loadFromTopoJSON } from "../data";
 import React from "react";
 
 export const actionLoadGeo = register({
   name: "loadGeo",
-  perform: (elements, appState, { features, error }) => {
-    console.info(features);
+  perform: (elements, appState, { elements: loadedElements, error }) => {
     return {
+      elements: [...elements, ...loadedElements],
+      appState: {
+        ...appState,
+        errorMessage: error,
+      },
       commitToHistory: false,
     };
   },
@@ -22,8 +26,8 @@ export const actionLoadGeo = register({
       aria-label={t("buttons.loadGeo")}
       showAriaLabel={useIsMobile()}
       onClick={() => {
-        loadFeaturesFromTopoJSON()
-          .then((features) => updateData({ features }))
+        loadFromTopoJSON()
+          .then(({ elements }) => updateData({ elements }))
           .catch((error) => {
             // if user cancels, ignore the error
             if (error.name === "AbortError") {

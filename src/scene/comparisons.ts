@@ -11,7 +11,8 @@ export const hasBackground = (type: string) =>
   type === "ellipse" ||
   type === "diamond" ||
   type === "draw" ||
-  type === "line";
+  type === "line" ||
+  type === "geometry";
 
 export const hasStroke = (type: string) =>
   type === "rectangle" ||
@@ -19,7 +20,8 @@ export const hasStroke = (type: string) =>
   type === "diamond" ||
   type === "arrow" ||
   type === "draw" ||
-  type === "line";
+  type === "line" ||
+  type === "geometry";
 
 export const hasText = (type: string) => type === "text";
 

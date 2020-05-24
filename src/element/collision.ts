@@ -92,7 +92,7 @@ export const hitTest = (
       );
     }
     return Math.hypot(a * tx - px, b * ty - py) < lineThreshold;
-  } else if (element.type === "rectangle") {
+  } else if (element.type === "rectangle" || element.type === "geometry") {
     if (isElementDraggableFromInside(element, appState)) {
       return (
         x > x1 - lineThreshold &&

@@ -29,6 +29,7 @@ export const isExcalidrawElement = (element: any): boolean => {
     element?.type === "ellipse" ||
     element?.type === "arrow" ||
     element?.type === "draw" ||
-    element?.type === "line"
+    element?.type === "line" ||
+    element?.type === "geometry"
   );
 };

@@ -86,6 +86,7 @@ const drawElementOnCanvas = (
   switch (element.type) {
     case "rectangle":
     case "diamond":
+    case "geometry":
     case "ellipse": {
       rc.draw(getShapeForElement(element) as Drawable);
       break;
@@ -180,6 +181,7 @@ export const generateRoughOptions = (element: ExcalidrawElement): Options => {
   switch (element.type) {
     case "rectangle":
     case "diamond":
+    case "geometry":
     case "ellipse": {
       options.fillStyle = element.fillStyle;
       options.fill =
@@ -188,6 +190,9 @@ export const generateRoughOptions = (element: ExcalidrawElement): Options => {
           : element.backgroundColor;
       if (element.type === "ellipse") {
         options.curveFitting = 1;
+      }
+      if (element.type === "geometry") {
+        options.simplification = 0.7;
       }
       return options;
     }
@@ -300,6 +305,10 @@ const generateElement = (
         shape = [];
         break;
       }
+      case "geometry": {
+        const options = generateRoughOptions(element);
+        shape = generator.path(element.path, options);
+      }
     }
     shapeCache.set(element, shape);
   }
@@ -374,6 +383,7 @@ export const renderElement = (
     case "line":
     case "draw":
     case "arrow":
+    case "geometry":
     case "text": {
       const elementWithCanvas = generateElement(element, generator, sceneState);
 
@@ -422,6 +432,7 @@ export const renderElementToSvg = (
     }
     case "rectangle":
     case "diamond":
+    case "geometry":
     case "ellipse": {
       generateElement(element, generator);
       const node = rsvg.draw(getShapeForElement(element) as Drawable);
